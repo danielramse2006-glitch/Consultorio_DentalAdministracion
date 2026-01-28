@@ -2,498 +2,1308 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Consultorio Dental - Sistema de Visitas</title>
+    <title>DentalCare Pro - Sistema de Gestión</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #0d8abc;
+            --secondary-color: #1ac0c6;
+            --accent-color: #ff7e5f;
+            --light-blue: #e3f2fd;
+            --dark-blue: #0a5a7a;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --light-gray: #f8f9fa;
+            --medium-gray: #e9ecef;
+            --dark-gray: #6c757d;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.12);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background-color: #f8f9fa;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
-        .container {
-            max-width: 1200px;
-        }
-        .header {
-            background: linear-gradient(135deg, #2c8ab9 0%, #1a6a9e 100%);
+
+        .dental-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-blue) 100%);
             color: white;
-            padding: 2rem 0;
-            border-radius: 0 0 10px 10px;
-            margin-bottom: 2rem;
+            padding: 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(13, 138, 188, 0.2);
         }
-        .card {
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+
+        .dental-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.1;
         }
-        .card:hover {
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.2);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-text h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .stats-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .stats-card:hover {
+            background: rgba(255, 255, 255, 0.25);
             transform: translateY(-5px);
         }
-        .btn-dental {
-            background-color: #2c8ab9;
+
+        .stats-card .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .stats-card .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .main-container {
+            padding: 2.5rem 0;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .card-dental {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: none;
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .card-dental:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-8px);
+        }
+
+        .card-header-dental {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
-        }
-        .btn-dental:hover {
-            background-color: #1a6a9e;
-            color: white;
-        }
-        .table th {
-            background-color: #2c8ab9;
-            color: white;
-        }
-        .table-hover tbody tr:hover {
-            background-color: rgba(44, 138, 185, 0.1);
-        }
-        .form-container {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .alert-empty {
-            padding: 3rem;
-            text-align: center;
+            padding: 1.25rem 1.5rem;
+            border-bottom: none;
+            font-weight: 600;
             font-size: 1.2rem;
         }
-        .footer {
-            margin-top: 3rem;
-            padding: 1.5rem 0;
+
+        .btn-dental {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-dental-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-blue) 100%);
+            color: white;
+        }
+
+        .btn-dental-primary:hover {
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-color) 100%);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(13, 138, 188, 0.2);
+        }
+
+        .btn-dental-success {
+            background: linear-gradient(135deg, var(--success-color) 0%, #27ae60 100%);
+            color: white;
+        }
+
+        .btn-dental-success:hover {
+            background: linear-gradient(135deg, #27ae60 0%, var(--success-color) 100%);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.2);
+        }
+
+        .btn-dental-warning {
+            background: linear-gradient(135deg, var(--warning-color) 0%, #e67e22 100%);
+            color: white;
+        }
+
+        .btn-dental-warning:hover {
+            background: linear-gradient(135deg, #e67e22 0%, var(--warning-color) 100%);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(243, 156, 18, 0.2);
+        }
+
+        .btn-dental-danger {
+            background: linear-gradient(135deg, var(--danger-color) 0%, #c0392b 100%);
+            color: white;
+        }
+
+        .btn-dental-danger:hover {
+            background: linear-gradient(135deg, #c0392b 0%, var(--danger-color) 100%);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.2);
+        }
+
+        .btn-dental-secondary {
+            background: linear-gradient(135deg, var(--dark-gray) 0%, #495057 100%);
+            color: white;
+        }
+
+        .btn-dental-secondary:hover {
+            background: linear-gradient(135deg, #495057 0%, var(--dark-gray) 100%);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(108, 117, 125, 0.2);
+        }
+
+        .table-dental {
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .table-dental thead th {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            font-weight: 600;
+            padding: 1.25rem 1rem;
+            border: none;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        .table-dental tbody tr {
+            transition: var(--transition);
+        }
+
+        .table-dental tbody tr:hover {
+            background-color: rgba(13, 138, 188, 0.05);
+            transform: scale(1.002);
+        }
+
+        .table-dental tbody td {
+            padding: 1.25rem 1rem;
+            border-bottom: 1px solid var(--medium-gray);
+            vertical-align: middle;
+        }
+
+        .table-dental tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badge-status {
+            padding: 0.4rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-new {
+            background-color: rgba(46, 204, 113, 0.15);
+            color: var(--success-color);
+        }
+
+        .badge-follow-up {
+            background-color: rgba(243, 156, 18, 0.15);
+            color: var(--warning-color);
+        }
+
+        .badge-emergency {
+            background-color: rgba(231, 76, 60, 0.15);
+            color: var(--danger-color);
+        }
+
+        .patient-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .empty-state {
+            padding: 4rem 2rem;
             text-align: center;
-            color: #6c757d;
-            border-top: 1px solid #dee2e6;
+            color: var(--dark-gray);
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            color: var(--medium-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .empty-state h3 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark-gray);
+        }
+
+        .empty-state p {
+            max-width: 500px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .form-container-dental {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .form-label-dental {
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control-dental {
+            border: 2px solid var(--medium-gray);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+        }
+
+        .form-control-dental:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(13, 138, 188, 0.25);
+        }
+
+        .modal-dental .modal-content {
+            border-radius: var(--border-radius);
+            border: none;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .modal-dental .modal-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-blue) 100%);
+            color: white;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            border-bottom: none;
+            padding: 1.5rem;
+        }
+
+        .modal-dental .modal-title {
+            font-weight: 600;
+        }
+
+        .modal-dental .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-dental .modal-footer {
+            border-top: 1px solid var(--medium-gray);
+            padding: 1.5rem;
+        }
+
+        .footer-dental {
+            background: var(--dark-blue);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 1.5rem;
+            height: 100%;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: rgba(13, 138, 188, 0.1);
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+        }
+
+        .feature-card h4 {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--dark-blue);
+        }
+
+        .feature-card p {
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .logo-text h1 {
+                font-size: 1.5rem;
+            }
+            
+            .stats-card {
+                padding: 1rem;
+            }
+            
+            .stats-card .number {
+                font-size: 2rem;
+            }
+            
+            .table-dental {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .form-container-dental {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        /* Estilos para los gráficos de ejemplo */
+        .chart-container {
+            height: 200px;
+            position: relative;
+            margin: 1.5rem 0;
+        }
+
+        .chart-bar {
+            position: absolute;
+            bottom: 0;
+            width: 30px;
+            background: linear-gradient(to top, var(--primary-color), var(--secondary-color));
+            border-radius: 4px 4px 0 0;
+            transition: var(--transition);
+        }
+
+        .chart-bar:hover {
+            opacity: 0.8;
         }
     </style>
 </head>
 <body>
-    <div class="header">
+    <!-- Header -->
+    <header class="dental-header">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-8">
-                    <h1 class="display-5 fw-bold">Consultorio Dental Sonrisa Saludable</h1>
-                    <p class="lead">Sistema de Gestión de Visitas de Pacientes</p>
-                </div>
-                <div class="col-md-4 text-end">
-                    <div class="d-inline-block bg-white text-dark p-3 rounded">
-                        <div class="fw-bold">Total de Visitas</div>
-                        <div id="total-visitas" class="h2 mb-0">1</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <!-- Panel principal -->
-        <div id="main-panel">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="h3 mb-0">Registro de Visitas</h2>
-                <button id="btn-nueva-visita" class="btn btn-success btn-lg">
-                    <i class="bi bi-plus-circle"></i> Registrar Nueva Visita
-                </button>
-            </div>
-
-            <!-- Tabla de visitas -->
-            <div id="visitas-table-container" class="card">
-                <div class="card-body p-0">
-                    <table class="table table-hover mb-0">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Cédula</th>
-                                <th>Edad</th>
-                                <th>Motivo</th>
-                                <th>Fecha y Hora</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="visitas-body">
-                            <!-- Las visitas se cargarán aquí con JavaScript -->
-                        </tbody>
-                    </table>
-                    <div id="empty-message" class="alert-empty" style="display: none;">
-                        <div class="mb-3">
-                            <i class="bi bi-calendar-x" style="font-size: 3rem; color: #6c757d;"></i>
+                <div class="col-md-6">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <i class="fas fa-tooth"></i>
                         </div>
-                        <h4>No hay visitas registradas</h4>
-                        <p class="text-muted">Comienza registrando una nueva visita haciendo clic en el botón "Registrar Nueva Visita"</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Información del sistema -->
-            <div class="row mt-4">
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">Instrucciones</h5>
-                            <p class="card-text">Este sistema te permite gestionar las visitas de pacientes al consultorio dental.</p>
-                            <ul class="list-unstyled">
-                                <li><i class="bi bi-plus-circle text-success"></i> <strong>Registrar:</strong> Añade nuevas visitas</li>
-                                <li><i class="bi bi-pencil-square text-warning"></i> <strong>Editar:</strong> Modifica visitas existentes</li>
-                                <li><i class="bi bi-trash text-danger"></i> <strong>Eliminar:</strong> Elimina visitas del sistema</li>
-                            </ul>
+                        <div class="logo-text">
+                            <h1>DentalCare Pro</h1>
+                            <p>Sistema de Gestión de Pacientes</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">Datos de Ejemplo</h5>
-                            <p class="card-text">El sistema incluye un paciente de ejemplo:</p>
-                            <div class="bg-light p-3 rounded">
-                                <p class="mb-1"><strong>Nombre:</strong> Son Goku</p>
-                                <p class="mb-1"><strong>Cédula:</strong> 001</p>
-                                <p class="mb-1"><strong>Edad:</strong> 22</p>
-                                <p class="mb-0"><strong>Motivo:</strong> Dolor de muelas</p>
+                <div class="col-md-6">
+                    <div class="row text-center">
+                        <div class="col-4">
+                            <div class="stats-card">
+                                <div class="number" id="total-patients">1</div>
+                                <div class="label">Pacientes</div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="stats-card">
+                                <div class="number" id="today-visits">1</div>
+                                <div class="label">Visitas Hoy</div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="stats-card">
+                                <div class="number" id="pending-actions">0</div>
+                                <div class="label">Pendientes</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">Información Técnica</h5>
-                            <p class="card-text">Esta es una versión HTML/JS del sistema original en PHP.</p>
-                            <p class="card-text">Los datos se almacenan en el navegador (LocalStorage) y se perderán al cerrar la página.</p>
-                            <p class="small text-muted">Desarrollado por: Ismel Amaury AM<br>Matrícula: 20231886</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="container">
+            <!-- Dashboard -->
+            <div id="dashboard-panel" class="fade-in">
+                <div class="row mb-4">
+                    <div class="col-md-8">
+                        <h2 class="section-title">Panel de Control</h2>
+                        <p class="text-muted">Gestiona las visitas de tus pacientes de manera eficiente</p>
+                    </div>
+                    <div class="col-md-4 text-md-end">
+                        <button id="btn-new-visit" class="btn btn-dental btn-dental-success">
+                            <i class="fas fa-plus-circle"></i> Nueva Visita
+                        </button>
+                        <button id="btn-export-data" class="btn btn-dental btn-dental-secondary ms-2">
+                            <i class="fas fa-file-export"></i> Exportar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tarjetas de características -->
+                <div class="row mb-5">
+                    <div class="col-md-3 mb-4">
+                        <div class="card-dental feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-user-injured"></i>
+                            </div>
+                            <h4>Gestión de Pacientes</h4>
+                            <p>Administra la información completa de tus pacientes de manera organizada.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card-dental feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <h4>Citas Programadas</h4>
+                            <p>Organiza y controla las citas de tus pacientes con recordatorios automáticos.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card-dental feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-file-medical"></i>
+                            </div>
+                            <h4>Historial Clínico</h4>
+                            <p>Mantén un registro completo del historial médico y dental de cada paciente.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card-dental feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4>Reportes y Análisis</h4>
+                            <p>Genera reportes estadísticos para mejorar la gestión de tu consultorio.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla de visitas -->
+                <div class="card-dental mb-5">
+                    <div class="card-header-dental d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="fas fa-list-alt me-2"></i> Últimas Visitas Registradas
+                        </div>
+                        <div class="position-relative">
+                            <i class="fas fa-bell"></i>
+                            <span id="notification-counter" class="notification-badge">1</span>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-dental">
+                                <thead>
+                                    <tr>
+                                        <th>Paciente</th>
+                                        <th>Identificación</th>
+                                        <th>Edad</th>
+                                        <th>Motivo</th>
+                                        <th>Fecha y Hora</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="visits-body">
+                                    <!-- Las visitas se cargarán aquí con JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="empty-state" class="empty-state" style="display: none;">
+                            <div class="empty-state-icon">
+                                <i class="fas fa-calendar-times"></i>
+                            </div>
+                            <h3>No hay visitas registradas</h3>
+                            <p>Aún no has registrado ninguna visita en el sistema. Comienza agregando una nueva visita.</p>
+                            <button id="btn-first-visit" class="btn btn-dental btn-dental-success">
+                                <i class="fas fa-plus-circle"></i> Registrar Primera Visita
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráfico de ejemplo (estático) -->
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="card-dental h-100">
+                            <div class="card-header-dental">
+                                <i class="fas fa-chart-bar me-2"></i> Visitas por Mes (Ejemplo)
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <div class="d-flex justify-content-around align-items-end h-100">
+                                        <div class="text-center">
+                                            <div class="chart-bar" style="height: 40%; left: 10%;"></div>
+                                            <div class="mt-2 small">Ene</div>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="chart-bar" style="height: 60%; left: 25%;"></div>
+                                            <div class="mt-2 small">Feb</div>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="chart-bar" style="height: 80%; left: 40%;"></div>
+                                            <div class="mt-2 small">Mar</div>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="chart-bar" style="height: 95%; left: 55%;"></div>
+                                            <div class="mt-2 small">Abr</div>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="chart-bar" style="height: 75%; left: 70%;"></div>
+                                            <div class="mt-2 small">May</div>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="chart-bar" style="height: 100%; left: 85%;"></div>
+                                            <div class="mt-2 small">Jun</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="card-dental h-100">
+                            <div class="card-header-dental">
+                                <i class="fas fa-user-clock me-2"></i> Próximas Citas (Ejemplo)
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group list-group-flush">
+                                    <div class="list-group-item d-flex justify-content-between align-items-center border-0 py-3">
+                                        <div>
+                                            <h6 class="mb-1">Carlos Rodríguez</h6>
+                                            <small class="text-muted">Limpieza dental general</small>
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill">15 Jun</span>
+                                    </div>
+                                    <div class="list-group-item d-flex justify-content-between align-items-center border-0 py-3">
+                                        <div>
+                                            <h6 class="mb-1">María González</h6>
+                                            <small class="text-muted">Revisión de ortodoncia</small>
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill">18 Jun</span>
+                                    </div>
+                                    <div class="list-group-item d-flex justify-content-between align-items-center border-0 py-3">
+                                        <div>
+                                            <h6 class="mb-1">José Pérez</h6>
+                                            <small class="text-muted">Extracción de muela</small>
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill">22 Jun</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Panel de registro de nueva visita -->
-        <div id="registrar-panel" class="form-container" style="display: none;">
-            <h2 class="mb-4">Nueva Visita</h2>
-            <form id="form-registrar">
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Nombre</label>
-                        <input type="text" id="nombre" name="nombre" class="form-control" required>
+            <!-- Panel de registro de nueva visita -->
+            <div id="register-panel" class="form-container-dental" style="display: none;">
+                <h2 class="section-title mb-4">Registrar Nueva Visita</h2>
+                <form id="form-register-visit">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label-dental">Nombre del Paciente *</label>
+                                <input type="text" id="patient-name" name="patient-name" class="form-control form-control-dental" placeholder="Ej: Juan Carlos" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label-dental">Apellidos *</label>
+                                <input type="text" id="patient-lastname" name="patient-lastname" class="form-control form-control-dental" placeholder="Ej: Pérez González" required>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Apellido</label>
-                        <input type="text" id="apellido" name="apellido" class="form-control" required>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label-dental">Número de Identificación *</label>
+                                <input type="text" id="patient-id" name="patient-id" class="form-control form-control-dental" placeholder="Ej: 001-1234567-8" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label-dental">Edad *</label>
+                                <input type="number" id="patient-age" name="patient-age" class="form-control form-control-dental" min="0" max="120" required>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Cédula</label>
-                        <input type="text" id="cedula" name="cedula" class="form-control" required>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label-dental">Teléfono de Contacto</label>
+                                <input type="tel" id="patient-phone" name="patient-phone" class="form-control form-control-dental" placeholder="Ej: 809-123-4567">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label-dental">Correo Electrónico</label>
+                                <input type="email" id="patient-email" name="patient-email" class="form-control form-control-dental" placeholder="ejemplo@correo.com">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Edad</label>
-                        <input type="number" id="edad" name="edad" class="form-control" min="0" required>
+                    
+                    <div class="mb-4">
+                        <label class="form-label-dental">Motivo de la Visita *</label>
+                        <select id="visit-reason" name="visit-reason" class="form-control form-control-dental" required>
+                            <option value="">Seleccione un motivo</option>
+                            <option value="Limpieza dental">Limpieza dental</option>
+                            <option value="Dolor de muelas">Dolor de muelas</option>
+                            <option value="Revisión general">Revisión general</option>
+                            <option value="Ortodoncia">Ortodoncia</option>
+                            <option value="Extracción">Extracción</option>
+                            <option value="Blanqueamiento">Blanqueamiento</option>
+                            <option value="Otro">Otro</option>
+                        </select>
                     </div>
-                </div>
-                <div class="mb-4">
-                    <label class="form-label">Motivo de la visita</label>
-                    <input type="text" id="motivo" name="motivo" class="form-control" required>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <button type="button" id="btn-cancelar-registro" class="btn btn-secondary">← Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Registrar Visita</button>
-                </div>
-            </form>
-        </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label-dental">Notas Adicionales</label>
+                        <textarea id="visit-notes" name="visit-notes" class="form-control form-control-dental" rows="3" placeholder="Observaciones, alergias, medicamentos, etc."></textarea>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-5">
+                        <button type="button" id="btn-cancel-register" class="btn btn-dental btn-dental-secondary">
+                            <i class="fas fa-arrow-left"></i> Volver al Panel
+                        </button>
+                        <button type="submit" class="btn btn-dental btn-dental-success">
+                            <i class="fas fa-save"></i> Guardar Visita
+                        </button>
+                    </div>
+                </form>
+            </div>
 
-        <!-- Panel de edición de visita -->
-        <div id="editar-panel" class="form-container" style="display: none;">
-            <h2 class="mb-4">Editar Visita</h2>
-            <form id="form-editar">
-                <input type="hidden" id="edit-index">
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Nombre</label>
-                        <input type="text" id="edit-nombre" name="nombre" class="form-control" required>
+            <!-- Panel de edición de visita -->
+            <div id="edit-panel" class="form-container-dental" style="display: none;">
+                <h2 class="section-title mb-4">Editar Visita</h2>
+                <form id="form-edit-visit">
+                    <input type="hidden" id="edit-visit-index">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label-dental">Nombre del Paciente *</label>
+                                <input type="text" id="edit-patient-name" name="patient-name" class="form-control form-control-dental" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label-dental">Apellidos *</label>
+                                <input type="text" id="edit-patient-lastname" name="patient-lastname" class="form-control form-control-dental" required>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Apellido</label>
-                        <input type="text" id="edit-apellido" name="apellido" class="form-control" required>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label-dental">Número de Identificación *</label>
+                                <input type="text" id="edit-patient-id" name="patient-id" class="form-control form-control-dental" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label-dental">Edad *</label>
+                                <input type="number" id="edit-patient-age" name="patient-age" class="form-control form-control-dental" min="0" max="120" required>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Cédula</label>
-                        <input type="text" id="edit-cedula" name="cedula" class="form-control" required>
+                    
+                    <div class="mb-4">
+                        <label class="form-label-dental">Motivo de la Visita *</label>
+                        <select id="edit-visit-reason" name="visit-reason" class="form-control form-control-dental" required>
+                            <option value="">Seleccione un motivo</option>
+                            <option value="Limpieza dental">Limpieza dental</option>
+                            <option value="Dolor de muelas">Dolor de muelas</option>
+                            <option value="Revisión general">Revisión general</option>
+                            <option value="Ortodoncia">Ortodoncia</option>
+                            <option value="Extracción">Extracción</option>
+                            <option value="Blanqueamiento">Blanqueamiento</option>
+                            <option value="Otro">Otro</option>
+                        </select>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Edad</label>
-                        <input type="number" id="edit-edad" name="edad" class="form-control" min="0" required>
+                    
+                    <div class="mb-4">
+                        <label class="form-label-dental">Notas Adicionales</label>
+                        <textarea id="edit-visit-notes" name="visit-notes" class="form-control form-control-dental" rows="3"></textarea>
                     </div>
-                </div>
-                <div class="mb-4">
-                    <label class="form-label">Motivo de la visita</label>
-                    <input type="text" id="edit-motivo" name="motivo" class="form-control" required>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <button type="button" id="btn-cancelar-edicion" class="btn btn-secondary">← Cancelar</button>
-                    <button type="submit" class="btn btn-warning">Guardar Cambios</button>
-                </div>
-            </form>
+                    
+                    <div class="d-flex justify-content-between mt-5">
+                        <button type="button" id="btn-cancel-edit" class="btn btn-dental btn-dental-secondary">
+                            <i class="fas fa-arrow-left"></i> Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-dental btn-dental-warning">
+                            <i class="fas fa-save"></i> Guardar Cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
-    <div class="footer">
+    <!-- Footer -->
+    <footer class="footer-dental">
         <div class="container">
-            <p>Sistema de Gestión de Consultorio Dental - Versión HTML/JS | Desarrollado por Ismel Amaury AM (20231886)</p>
-            <p class="small">Esta es una versión de demostración. Los datos se almacenan localmente en el navegador.</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="logo-container mb-3">
+                        <div class="logo-icon" style="width: 50px; height: 50px; font-size: 1.8rem;">
+                            <i class="fas fa-tooth"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h4 style="color: white;">DentalCare Pro</h4>
+                            <p style="opacity: 0.8;">Sistema de Gestión Dental</p>
+                        </div>
+                    </div>
+                    <p>Software especializado para la gestión de consultorios dentales.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="mb-3" style="color: white;">Enlaces Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none" style="color: rgba(255,255,255,0.8);">Panel Principal</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none" style="color: rgba(255,255,255,0.8);">Nueva Visita</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none" style="color: rgba(255,255,255,0.8);">Reportes</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none" style="color: rgba(255,255,255,0.8);">Configuración</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="mb-3" style="color: white;">Contacto</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> info@dentalcarepro.com</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> (809) 555-1234</li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Santo Domingo, RD</li>
+                    </ul>
+                </div>
+            </div>
+            <hr style="border-color: rgba(255,255,255,0.1); margin: 2rem 0;">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">© 2023 DentalCare Pro. Todos los derechos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">Desarrollado por: Ismel Amaury AM | Matrícula: 20231886</p>
+                </div>
+            </div>
         </div>
-    </div>
+    </footer>
 
     <!-- Modal de confirmación para eliminar -->
-    <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade modal-dental" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Confirmar eliminación</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title"><i class="fas fa-exclamation-triangle me-2"></i> Confirmar Eliminación</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ¿Estás seguro de que deseas eliminar esta visita? Esta acción no se puede deshacer.
+                    <p>¿Estás seguro de que deseas eliminar esta visita? Esta acción no se puede deshacer.</p>
+                    <div class="alert alert-warning mt-3" role="alert">
+                        <i class="fas fa-info-circle me-2"></i> Se eliminarán todos los datos asociados a esta visita.
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" id="btn-confirm-delete" class="btn btn-danger">Eliminar</button>
+                    <button type="button" class="btn btn-dental btn-dental-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                    <button type="button" id="btn-confirm-delete" class="btn btn-dental btn-dental-danger">
+                        <i class="fas fa-trash"></i> Eliminar Visita
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
         // Datos iniciales - basados en visitas.json
-        let visitas = [
+        let visits = [
             {
-                nombre: "Son",
-                apellido: "Goku",
-                cedula: "001",
-                edad: 22,
-                motivo: "Dolor de muelas",
-                fecha_hora: "2025-06-14 04:21:34"
+                name: "Son",
+                lastname: "Goku",
+                id: "001",
+                age: 22,
+                reason: "Dolor de muelas",
+                date_time: "2025-06-14 04:21:34",
+                status: "emergency",
+                phone: "",
+                email: "",
+                notes: ""
             }
         ];
 
+        // Variables para control de estado
+        let visitToDelete = null;
+
         // Cargar datos desde localStorage si existen
-        function cargarVisitas() {
-            const datosGuardados = localStorage.getItem('visitasDentales');
-            if (datosGuardados) {
-                visitas = JSON.parse(datosGuardados);
+        function loadVisits() {
+            const savedData = localStorage.getItem('dentalVisits');
+            if (savedData) {
+                visits = JSON.parse(savedData);
             }
-            actualizarInterfaz();
+            updateInterface();
         }
 
         // Guardar datos en localStorage
-        function guardarVisitas() {
-            localStorage.setItem('visitasDentales', JSON.stringify(visitas));
-            actualizarInterfaz();
+        function saveVisits() {
+            localStorage.setItem('dentalVisits', JSON.stringify(visits));
+            updateInterface();
         }
 
         // Actualizar la interfaz con los datos actuales
-        function actualizarInterfaz() {
-            const visitasBody = document.getElementById('visitas-body');
-            const totalVisitas = document.getElementById('total-visitas');
-            const emptyMessage = document.getElementById('empty-message');
+        function updateInterface() {
+            const visitsBody = document.getElementById('visits-body');
+            const totalPatients = document.getElementById('total-patients');
+            const todayVisits = document.getElementById('today-visits');
+            const emptyState = document.getElementById('empty-state');
+            const notificationCounter = document.getElementById('notification-counter');
             
-            totalVisitas.textContent = visitas.length;
+            // Actualizar estadísticas
+            totalPatients.textContent = visits.length;
             
-            if (visitas.length === 0) {
-                visitasBody.innerHTML = '';
-                emptyMessage.style.display = 'block';
+            // Contar visitas de hoy (ficticio para demostración)
+            const today = new Date().toISOString().split('T')[0];
+            const todayCount = visits.filter(v => v.date_time.includes(today)).length;
+            todayVisits.textContent = todayCount;
+            
+            // Actualizar notificaciones
+            notificationCounter.textContent = visits.length;
+            
+            // Mostrar/ocultar estado vacío
+            if (visits.length === 0) {
+                visitsBody.innerHTML = '';
+                emptyState.style.display = 'block';
                 return;
             }
             
-            emptyMessage.style.display = 'none';
+            emptyState.style.display = 'none';
             
+            // Generar tabla
             let html = '';
-            visitas.forEach((visita, index) => {
+            visits.forEach((visit, index) => {
+                const fullName = `${visit.name} ${visit.lastname}`;
+                const initials = `${visit.name.charAt(0)}${visit.lastname.charAt(0)}`.toUpperCase();
+                const statusClass = visit.status === 'emergency' ? 'badge-emergency' : 
+                                  visit.status === 'follow-up' ? 'badge-follow-up' : 'badge-new';
+                const statusText = visit.status === 'emergency' ? 'Urgente' : 
+                                  visit.status === 'follow-up' ? 'Seguimiento' : 'Nuevo';
+                
                 html += `
                     <tr>
-                        <td>${visita.nombre}</td>
-                        <td>${visita.apellido}</td>
-                        <td>${visita.cedula}</td>
-                        <td>${visita.edad}</td>
-                        <td>${visita.motivo}</td>
-                        <td>${visita.fecha_hora}</td>
                         <td>
-                            <button class="btn btn-sm btn-warning btn-editar" data-index="${index}">
-                                <i class="bi bi-pencil-square"></i> Editar
+                            <div class="d-flex align-items-center">
+                                <div class="patient-avatar me-3">
+                                    ${initials}
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">${fullName}</h6>
+                                    ${visit.phone ? `<small class="text-muted">${visit.phone}</small>` : ''}
+                                </div>
+                            </div>
+                        </td>
+                        <td>${visit.id}</td>
+                        <td>${visit.age} años</td>
+                        <td>${visit.reason}</td>
+                        <td>${formatDateTime(visit.date_time)}</td>
+                        <td><span class="badge-status ${statusClass}">${statusText}</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-dental btn-dental-warning btn-edit-visit" data-index="${index}">
+                                <i class="fas fa-edit"></i>
                             </button>
-                            <button class="btn btn-sm btn-danger btn-eliminar" data-index="${index}">
-                                <i class="bi bi-trash"></i> Eliminar
+                            <button class="btn btn-sm btn-dental btn-dental-danger btn-delete-visit" data-index="${index}">
+                                <i class="fas fa-trash"></i>
                             </button>
                         </td>
                     </tr>
                 `;
             });
             
-            visitasBody.innerHTML = html;
+            visitsBody.innerHTML = html;
             
-            // Añadir eventos a los botones recién creados
-            document.querySelectorAll('.btn-editar').forEach(btn => {
+            // Añadir eventos a los botones
+            document.querySelectorAll('.btn-edit-visit').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const index = this.getAttribute('data-index');
-                    mostrarEdicion(index);
+                    showEditPanel(index);
                 });
             });
             
-            document.querySelectorAll('.btn-eliminar').forEach(btn => {
+            document.querySelectorAll('.btn-delete-visit').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const index = this.getAttribute('data-index');
-                    mostrarConfirmacionEliminar(index);
+                    showDeleteConfirmation(index);
                 });
             });
         }
 
-        // Mostrar panel de registro
-        function mostrarRegistro() {
-            document.getElementById('main-panel').style.display = 'none';
-            document.getElementById('registrar-panel').style.display = 'block';
-            document.getElementById('editar-panel').style.display = 'none';
-            
-            // Limpiar formulario
-            document.getElementById('form-registrar').reset();
+        // Formatear fecha y hora
+        function formatDateTime(dateTimeStr) {
+            const date = new Date(dateTimeStr.replace(' ', 'T'));
+            return date.toLocaleDateString('es-ES', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
         }
 
-        // Mostrar panel de edición
-        function mostrarEdicion(index) {
-            const visita = visitas[index];
+        // Obtener fecha y hora actual
+        function getCurrentDateTime() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
             
-            document.getElementById('main-panel').style.display = 'none';
-            document.getElementById('registrar-panel').style.display = 'none';
-            document.getElementById('editar-panel').style.display = 'block';
-            
-            // Llenar formulario con datos de la visita
-            document.getElementById('edit-index').value = index;
-            document.getElementById('edit-nombre').value = visita.nombre;
-            document.getElementById('edit-apellido').value = visita.apellido;
-            document.getElementById('edit-cedula').value = visita.cedula;
-            document.getElementById('edit-edad').value = visita.edad;
-            document.getElementById('edit-motivo').value = visita.motivo;
+            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        }
+
+        // Determinar estado basado en motivo
+        function determineStatus(reason) {
+            if (reason.includes('Dolor') || reason.includes('Emergencia') || reason.includes('Extracción')) {
+                return 'emergency';
+            } else if (reason.includes('Revisión') || reason.includes('Seguimiento')) {
+                return 'follow-up';
+            } else {
+                return 'new';
+            }
         }
 
         // Mostrar panel principal
-        function mostrarPrincipal() {
-            document.getElementById('main-panel').style.display = 'block';
-            document.getElementById('registrar-panel').style.display = 'none';
-            document.getElementById('editar-panel').style.display = 'none';
+        function showDashboard() {
+            document.getElementById('dashboard-panel').style.display = 'block';
+            document.getElementById('register-panel').style.display = 'none';
+            document.getElementById('edit-panel').style.display = 'none';
+            document.getElementById('dashboard-panel').classList.add('fade-in');
+        }
+
+        // Mostrar panel de registro
+        function showRegisterPanel() {
+            document.getElementById('dashboard-panel').style.display = 'none';
+            document.getElementById('register-panel').style.display = 'block';
+            document.getElementById('edit-panel').style.display = 'none';
+            document.getElementById('register-panel').classList.add('fade-in');
+            
+            // Resetear formulario
+            document.getElementById('form-register-visit').reset();
+        }
+
+        // Mostrar panel de edición
+        function showEditPanel(index) {
+            const visit = visits[index];
+            
+            document.getElementById('dashboard-panel').style.display = 'none';
+            document.getElementById('register-panel').style.display = 'none';
+            document.getElementById('edit-panel').style.display = 'block';
+            document.getElementById('edit-panel').classList.add('fade-in');
+            
+            // Llenar formulario con datos de la visita
+            document.getElementById('edit-visit-index').value = index;
+            document.getElementById('edit-patient-name').value = visit.name;
+            document.getElementById('edit-patient-lastname').value = visit.lastname;
+            document.getElementById('edit-patient-id').value = visit.id;
+            document.getElementById('edit-patient-age').value = visit.age;
+            document.getElementById('edit-visit-reason').value = visit.reason;
+            document.getElementById('edit-visit-notes').value = visit.notes || '';
         }
 
         // Mostrar confirmación para eliminar
-        let visitaAEliminar = null;
-        function mostrarConfirmacionEliminar(index) {
-            visitaAEliminar = index;
-            const modal = new bootstrap.Modal(document.getElementById('confirmModal'));
+        function showDeleteConfirmation(index) {
+            visitToDelete = index;
+            const modal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
             modal.show();
         }
 
-        // Formatear fecha actual para nueva visita
-        function obtenerFechaActual() {
-            const ahora = new Date();
-            const año = ahora.getFullYear();
-            const mes = String(ahora.getMonth() + 1).padStart(2, '0');
-            const dia = String(ahora.getDate()).padStart(2, '0');
-            const horas = String(ahora.getHours()).padStart(2, '0');
-            const minutos = String(ahora.getMinutes()).padStart(2, '0');
-            const segundos = String(ahora.getSeconds()).padStart(2, '0');
-            
-            return `${año}-${mes}-${dia} ${horas}:${minutos}:${segundos}`;
-        }
-
-        // Inicializar eventos cuando el DOM esté cargado
+        // Inicializar cuando el DOM esté cargado
         document.addEventListener('DOMContentLoaded', function() {
-            cargarVisitas();
+            loadVisits();
             
             // Botón para nueva visita
-            document.getElementById('btn-nueva-visita').addEventListener('click', mostrarRegistro);
+            document.getElementById('btn-new-visit').addEventListener('click', showRegisterPanel);
+            document.getElementById('btn-first-visit').addEventListener('click', showRegisterPanel);
+            
+            // Botón para exportar datos (demo)
+            document.getElementById('btn-export-data').addEventListener('click', function() {
+                alert('Función de exportación en desarrollo. Los datos se guardan automáticamente en el navegador.');
+            });
             
             // Botón para cancelar registro
-            document.getElementById('btn-cancelar-registro').addEventListener('click', mostrarPrincipal);
+            document.getElementById('btn-cancel-register').addEventListener('click', showDashboard);
             
             // Botón para cancelar edición
-            document.getElementById('btn-cancelar-edicion').addEventListener('click', mostrarPrincipal);
+            document.getElementById('btn-cancel-edit').addEventListener('click', showDashboard);
             
             // Formulario de registro
-            document.getElementById('form-registrar').addEventListener('submit', function(e) {
+            document.getElementById('form-register-visit').addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                const nuevaVisita = {
-                    nombre: document.getElementById('nombre').value.trim(),
-                    apellido: document.getElementById('apellido').value.trim(),
-                    cedula: document.getElementById('cedula').value.trim(),
-                    edad: parseInt(document.getElementById('edad').value),
-                    motivo: document.getElementById('motivo').value.trim(),
-                    fecha_hora: obtenerFechaActual()
+                const newVisit = {
+                    name: document.getElementById('patient-name').value.trim(),
+                    lastname: document.getElementById('patient-lastname').value.trim(),
+                    id: document.getElementById('patient-id').value.trim(),
+                    age: parseInt(document.getElementById('patient-age').value),
+                    reason: document.getElementById('visit-reason').value,
+                    date_time: getCurrentDateTime(),
+                    status: determineStatus(document.getElementById('visit-reason').value),
+                    phone: document.getElementById('patient-phone').value.trim(),
+                    email: document.getElementById('patient-email').value.trim(),
+                    notes: document.getElementById('visit-notes').value.trim()
                 };
                 
-                visitas.push(nuevaVisita);
-                guardarVisitas();
-                mostrarPrincipal();
+                visits.push(newVisit);
+                saveVisits();
+                showDashboard();
                 
                 // Mostrar mensaje de éxito
-                alert('Visita registrada exitosamente!');
+                showNotification('Visita registrada exitosamente', 'success');
             });
             
             // Formulario de edición
-            document.getElementById('form-editar').addEventListener('submit', function(e) {
+            document.getElementById('form-edit-visit').addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                const index = document.getElementById('edit-index').value;
-                const fechaOriginal = visitas[index].fecha_hora;
+                const index = document.getElementById('edit-visit-index').value;
+                const originalDateTime = visits[index].date_time;
                 
-                visitas[index] = {
-                    nombre: document.getElementById('edit-nombre').value.trim(),
-                    apellido: document.getElementById('edit-apellido').value.trim(),
-                    cedula: document.getElementById('edit-cedula').value.trim(),
-                    edad: parseInt(document.getElementById('edit-edad').value),
-                    motivo: document.getElementById('edit-motivo').value.trim(),
-                    fecha_hora: fechaOriginal  // Mantener la fecha original
+                visits[index] = {
+                    name: document.getElementById('edit-patient-name').value.trim(),
+                    lastname: document.getElementById('edit-patient-lastname').value.trim(),
+                    id: document.getElementById('edit-patient-id').value.trim(),
+                    age: parseInt(document.getElementById('edit-patient-age').value),
+                    reason: document.getElementById('edit-visit-reason').value,
+                    date_time: originalDateTime,
+                    status: determineStatus(document.getElementById('edit-visit-reason').value),
+                    phone: visits[index].phone,
+                    email: visits[index].email,
+                    notes: document.getElementById('edit-visit-notes').value.trim()
                 };
                 
-                guardarVisitas();
-                mostrarPrincipal();
+                saveVisits();
+                showDashboard();
                 
                 // Mostrar mensaje de éxito
-                alert('Visita actualizada exitosamente!');
+                showNotification('Visita actualizada exitosamente', 'success');
             });
             
             // Confirmación de eliminación
             document.getElementById('btn-confirm-delete').addEventListener('click', function() {
-                if (visitaAEliminar !== null) {
-                    visitas.splice(visitaAEliminar, 1);
-                    guardarVisitas();
+                if (visitToDelete !== null) {
+                    visits.splice(visitToDelete, 1);
+                    saveVisits();
                     
                     // Cerrar modal
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('confirmModal'));
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('confirmDeleteModal'));
                     modal.hide();
                     
                     // Mostrar mensaje de éxito
-                    alert('Visita eliminada exitosamente!');
+                    showNotification('Visita eliminada exitosamente', 'info');
                     
-                    visitaAEliminar = null;
+                    visitToDelete = null;
                 }
             });
             
-            // Botón para limpiar todos los datos (oculto, solo para desarrollo)
-            const btnLimpiar = document.createElement('button');
-            btnLimpiar.textContent = 'Limpiar datos';
-            btnLimpiar.className = 'btn btn-sm btn-outline-secondary';
-            btnLimpiar.style.position = 'fixed';
-            btnLimpiar.style.bottom = '10px';
-            btnLimpiar.style.right = '10px';
-            btnLimpiar.style.zIndex = '1000';
-            btnLimpiar.addEventListener('click', function() {
-                if (confirm('¿Estás seguro de que deseas eliminar todos los datos? Esto no se puede deshacer.')) {
-                    localStorage.removeItem('visitasDentales');
-                    visitas = [];
-                    actualizarInterfaz();
-                    alert('Todos los datos han sido eliminados.');
+            // Función para mostrar notificaciones
+            function showNotification(message, type) {
+                // Crear elemento de notificación
+                const notification = document.createElement('div');
+                notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+                notification.style.top = '20px';
+                notification.style.right = '20px';
+                notification.style.zIndex = '9999';
+                notification.style.minWidth = '300px';
+                notification.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+                notification.innerHTML = `
+                    <strong>${type === 'success' ? 'Éxito!' : 'Información'}</strong> ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                // Auto-eliminar después de 5 segundos
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 5000);
+            }
+            
+            // Añadir algunos datos de ejemplo adicionales para mejorar la demo
+            setTimeout(() => {
+                if (visits.length < 4) {
+                    const sampleVisits = [
+                        {
+                            name: "Ana",
+                            lastname: "Martínez",
+                            id: "002",
+                            age: 34,
+                            reason: "Limpieza dental",
+                            date_time: "2025-06-15 10:30:00",
+                            status: "new",
+                            phone: "809-555-1234",
+                            email: "ana.martinez@email.com",
+                            notes: "Paciente con sensibilidad en encías"
+                        },
+                        {
+                            name: "Carlos",
+                            lastname: "Rodríguez",
+                            id: "003",
+                            age: 45,
+                            reason: "Revisión general",
+                            date_time: "2025-06-16 14:15:00",
+                            status: "follow-up",
+                            phone: "809-555-5678",
+                            email: "carlos.rodriguez@email.com",
+                            notes: "Control post-operatorio"
+                        },
+                        {
+                            name: "María",
+                            lastname: "González",
+                            id: "004",
+                            age: 28,
+                            reason: "Ortodoncia",
+                            date_time: "2025-06-17 09:45:00",
+                            status: "follow-up",
+                            phone: "809-555-9012",
+                            email: "maria.gonzalez@email.com",
+                            notes: "Ajuste de brackets"
+                        }
+                    ];
+                    
+                    // Agregar solo si no existen ya
+                    sampleVisits.forEach(sample => {
+                        if (!visits.some(v => v.id === sample.id)) {
+                            visits.push(sample);
+                        }
+                    });
+                    
+                    saveVisits();
                 }
-            });
-            document.body.appendChild(btnLimpiar);
+            }, 1000);
         });
     </script>
 </body>
